@@ -63,7 +63,7 @@
 
 					for (var i = 0; i < data.length; i++) {
 						var file = data[i];
-
+						
 						if (file.name != "index.html") {
 							console.log(file.name);
 
@@ -73,7 +73,7 @@
 
 							a.appendChild(txt);
 							a.title = file.name;
-							a.href = file.download_url;
+							a.href = `https://jimmymcson.github.io/cdn/${file.name}`;
 
 							li.appendChild(a);
 							list.appendChild(li);
