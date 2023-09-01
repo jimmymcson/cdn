@@ -1,18 +1,84 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Directory listing</title>
+		<meta charset="utf-8"/>
+		<title>Directory Listing</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+		<style>
+			li {
+				margin-left: 25px
+			}
+
+			h2 {
+				color: #ddd;
+				font-weight: bold
+			}
+
+			body {
+				margin: 0;
+				font-size: 20px;
+				overflow: hidden;
+				font-family: monospace;
+				background-color: #222
+			}
+
+			body, html {
+				margin-left: 8px;
+				height: 100%;
+			}
+			
+			p {
+				margin-left: 25px
+			}
+			
+			ul, ol, li {
+				margin: 0px;
+				color: #aaa;
+				margin-top: 10px
+			}
+
+			h2, a, p {
+				color: #aaa;
+				margin-top: 10px;
+				margin-bottom: 10px;
+			}
+		</style>
 	</head>
 
 	<body>
-		<h1>Listing /</h1>
-		<script>
-			$.getJSON('/', data => {
+		<h2>jimson's cdn</h2>
+		<p>my cdn for stuff n' things</p>
+		<hr style="width:50%; text-align:left; margin-left:0; margin-top: 10px; margin-bottom: 10px">
 
-				for (var i = 0; i < data.length; i++) {
-					var item = data[i];
-					document.write(`<li><a href="${item}">${item}</a></li>`);
+		<h2 id="cc">contents</h2>
+
+		<script>
+			var list = document.createElement('ul');
+			document.body.appendChild(list);
+
+			$.ajax({
+				url: "https://api.github.com/repos/jimmymcson/cdn/contents/",
+				success: function(data){
+
+					for (var i = 0; i < data.length; i++) {
+						var file = data[i];
+
+						if (file.name != "index.html") {
+							console.log(file.name);
+
+							var a = document.createElement('a');
+							var li = document.createElement('li');
+							var txt = document.createTextNode(file.name);
+
+							a.appendChild(txt);
+							a.title = file.name;
+							a.href = file.download_url;
+
+							li.appendChild(a);
+							list.appendChild(li);
+						}
+					}
 				}
 			});
 		</script>
