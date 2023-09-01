@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Directory listing</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+
+	<body>
+		<h1>Listing /</h1>
+		<script>
+			$.getJSON('/', data => {
+
+				for (var i = 0; i < data.length; i++) {
+					var item = data[i];
+					document.write(`<li><a href="${item}">${item}</a></li>`);
+				}
+			});
+		</script>
+	</body>
+</html>
